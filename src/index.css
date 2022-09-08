@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:first-child {
+  margin-top: 0;
+}
+
+:last-child {
+  margin-bottom: 0;
+}
+
+.line-clamp {
+  --max-height: 200px;
+
+  overflow: hidden;
+  max-height: var(--max-height);
+}
+
+.mask {
+  mask-image: linear-gradient(
+    to bottom,
+    hsl(var(--b1)),
+    hsl(var(--b1)),
+    transparent
+  );
+}
+
+a {
+  @apply link link-hover;
+}
