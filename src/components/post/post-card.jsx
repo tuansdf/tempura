@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-location";
 import HlsPlayer from "/src/components/post/hls-player";
 import Markdown from "/src/components/shared/markdown";
-import { getElapsedTimeMessage } from "/src/helpers/date";
+import { getDateTimeMessage, getElapsedTimeMessage } from "/src/helpers/date";
+import { getReadableNumber } from "/src/helpers/number";
 
 export default function PostCard({ post, isDetail = false }) {
   if (!post || !Object.keys(post).length) return null;
@@ -21,7 +22,9 @@ export default function PostCard({ post, isDetail = false }) {
           <Link to={`/user/${post.author}`} className="link-primary">
             u/{post.author}
           </Link>
-          <span className="t">{getElapsedTimeMessage(post.created)}</span>
+          <span title={getDateTimeMessage(post.created)}>
+            {getElapsedTimeMessage(post.created)}
+          </span>
         </div>
         {/* end header */}
 
@@ -73,10 +76,16 @@ export default function PostCard({ post, isDetail = false }) {
         {/* footer */}
         <div className="flex flex-wrap gap-2 p-6 pt-0 md:p-0">
           <span>
-            <span className="font-bold">{post.score}</span> upvotes
+            <span className="font-bold" title={post.score}>
+              {getReadableNumber(post.score)}
+            </span>{" "}
+            upvotes
           </span>
           <span>
-            <span className="font-bold">{post.num_comments}</span> comments
+            <span className="font-bold" title={post.num_comments}>
+              {getReadableNumber(post.num_comments)}
+            </span>{" "}
+            comments
           </span>
           {post.stickied && <span className="badge font-bold">Pinned</span>}
         </div>
