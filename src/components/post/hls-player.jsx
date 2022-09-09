@@ -1,7 +1,7 @@
 import Hls from "hls.js";
 import { useEffect, useRef } from "react";
 
-const HlsPlayer = ({ url }) => {
+export default function HlsPlayer({ url }) {
   const player = useRef(null);
 
   useEffect(() => {
@@ -19,6 +19,4 @@ const HlsPlayer = ({ url }) => {
       <track kind="captions" />
     </video>
   );
-};
-
-export default HlsPlayer;
+}

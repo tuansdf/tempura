@@ -3,7 +3,7 @@ import DOMPurify from "dompurify";
 import { marked } from "marked";
 import { useEffect, useRef, useState } from "react";
 
-const Markdown = ({ content, clamp = false }) => {
+export default function Markdown({ content, clamp = false }) {
   const [isLong, setIsLong] = useState(false);
 
   const markdown = useRef(null);
@@ -28,6 +28,4 @@ const Markdown = ({ content, clamp = false }) => {
       )}
     ></div>
   );
-};
-
-export default Markdown;
+}

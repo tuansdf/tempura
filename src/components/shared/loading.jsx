@@ -1,6 +1,6 @@
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
-const Loading = () => {
+export default function Loading() {
   return (
     <div className="alert alert-info">
       <div>
@@ -8,6 +8,4 @@ const Loading = () => {
       </div>
     </div>
   );
-};
-
-export default Loading;
+}

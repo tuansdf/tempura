@@ -11,7 +11,7 @@ import Markdown from "/src/components/shared/markdown";
 
 import { getDateTimeMessage, getElapsedTimeMessage } from "/src/helpers/date";
 
-const Comment = ({ maxDepth = 10, defaultDepth = 5, comment }) => {
+export default function Comment({ maxDepth = 10, defaultDepth = 5, comment }) {
   if (!comment || !Object.keys(comment).length) return null;
 
   const [isCollapsed, setIsCollapsed] = useState(comment.depth >= defaultDepth);
@@ -36,7 +36,7 @@ const Comment = ({ maxDepth = 10, defaultDepth = 5, comment }) => {
           {getElapsedTimeMessage(comment.created)}
         </span>
 
-        <label className="swap-rotate swap">
+        <label className="swap swap-rotate">
           <input
             type="checkbox"
             onChange={toggleComment}
@@ -58,6 +58,4 @@ const Comment = ({ maxDepth = 10, defaultDepth = 5, comment }) => {
       {/* end body */}
     </div>
   );
-};
-
-export default Comment;
+}

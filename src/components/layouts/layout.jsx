@@ -6,7 +6,7 @@ export default function Layout() {
   return (
     <>
       <Header />
-      <div className="container max-w-screen-md">
+      <div className="container max-w-screen-md py-4">
         <Outlet />
       </div>
     </>

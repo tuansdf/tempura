@@ -1,6 +1,6 @@
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 
-const Error = ({ text }) => {
+export default function Error({ text }) {
   return (
     <div className="alert alert-error">
       <div>
@@ -9,6 +9,4 @@ const Error = ({ text }) => {
       </div>
     </div>
   );
-};
-
-export default Error;
+}

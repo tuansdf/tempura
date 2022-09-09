@@ -11,10 +11,10 @@ export default function PostCard({ post, isDetail = false }) {
     post.preview?.reddit_video_preview?.hls_url;
 
   return (
-    <div className="card card-bordered shadow-lg">
-      <div className="card-body space-y-2 p-4 md:space-y-4 md:p-8">
+    <div className="card shadow-lg">
+      <div className="card-body space-y-2 p-0 md:space-y-4 md:p-8">
         {/* header */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 p-6 pb-0 md:p-0">
           <Link to={`/r/${post.subreddit}`} className="link-primary font-bold">
             r/{post.subreddit}
           </Link>
@@ -27,7 +27,7 @@ export default function PostCard({ post, isDetail = false }) {
 
         {/* body */}
 
-        <div>
+        <div className="px-6 md:px-0">
           <Link
             className="card-title link-primary inline text-base"
             to={isDetail ? null : post.permalink}
@@ -38,7 +38,7 @@ export default function PostCard({ post, isDetail = false }) {
         </div>
 
         {post.url_overridden_by_dest && (
-          <div>
+          <div className="px-6 md:px-0">
             <a className="truncate" href={post.url_overridden_by_dest}>
               {post.url_overridden_by_dest}
             </a>
@@ -46,7 +46,9 @@ export default function PostCard({ post, isDetail = false }) {
         )}
 
         {(post.selftext || post.body) && (
-          <Markdown content={post.selftext || post.body} clamp={!isDetail} />
+          <div className="px-6 md:px-0">
+            <Markdown content={post.selftext || post.body} clamp={!isDetail} />
+          </div>
         )}
 
         {videoUrl && (
@@ -69,7 +71,7 @@ export default function PostCard({ post, isDetail = false }) {
         {/* end body */}
 
         {/* footer */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 p-6 pt-0 md:p-0">
           <span>
             <span className="font-bold">{post.score}</span> upvotes
           </span>

@@ -8,10 +8,11 @@ import {
 import clsx from "clsx";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
+import { Themes } from "/src/constants/themes";
 
 import { themeAtom } from "/src/stores/theme.store";
 
-const Header = () => {
+export default function Header() {
   // location
   const navigate = useNavigate();
   const search = useSearch();
@@ -28,10 +29,16 @@ const Header = () => {
     switchTheme(theme);
   }, []);
 
-  const switchTheme = () => {
-    const newTheme = theme === "dracula" ? "garden" : "dracula";
-    setTheme(newTheme);
+  const switchTheme = (newTheme) => {
     const html = document.querySelector("html");
+    setTheme(newTheme);
+    html.setAttribute("data-theme", newTheme);
+  };
+
+  const toggleTheme = () => {
+    const newTheme = theme === Themes.DARK ? Themes.LIGHT : Themes.DARK;
+    const html = document.querySelector("html");
+    setTheme(newTheme);
     html.setAttribute("data-theme", newTheme);
   };
 
@@ -60,9 +67,9 @@ const Header = () => {
 
   return (
     <>
-      <nav className="navbar relative mb-4 p-0">
+      <nav className="navbar relative p-0">
         {/* left */}
-        <ul>
+        <ul className="ml-4">
           <li>
             <Link className="btn btn-ghost" to="/">
               Home
@@ -74,7 +81,7 @@ const Header = () => {
         {/* middle */}
         <button
           onClick={toggleMenu}
-          className="btn btn-ghost btn-circle ml-auto md:hidden"
+          className="btn btn-circle btn-ghost ml-auto mr-4 md:hidden"
         >
           <Bars3Icon className="h-6 w-6" />
         </button>
@@ -82,13 +89,11 @@ const Header = () => {
           className={clsx(
             "absolute top-full z-40 ml-auto w-full overflow-hidden bg-base-100 transition-all md:relative md:h-max md:w-auto md:pb-0",
             { "h-0": !isMenu },
-            { "pb-4": isMenu }
+            { "py-4": isMenu }
           )}
         >
-          <ul
-            className={clsx("flex flex-wrap items-start gap-2 md:flex-nowrap")}
-          >
-            <li className="order-last md:order-first">
+          <ul className="flex flex-wrap items-start gap-2 md:flex-nowrap">
+            <li className="order-last ml-4 md:order-first md:ml-0">
               <form
                 role="search"
                 className="form-control"
@@ -108,7 +113,7 @@ const Header = () => {
                 </div>
               </form>
             </li>
-            <li>
+            <li className="ml-4 md:ml-0">
               <a
                 href="https://github.com/tuansdf/tempura"
                 target="_blank"
@@ -118,7 +123,7 @@ const Header = () => {
               </a>
             </li>
             <li>
-              <button className="btn btn-ghost" onClick={switchTheme}>
+              <button className="btn btn-ghost" onClick={toggleTheme}>
                 Theme
               </button>
             </li>
@@ -127,6 +132,4 @@ const Header = () => {
       </nav>
     </>
   );
-};
-
-export default Header;
+}

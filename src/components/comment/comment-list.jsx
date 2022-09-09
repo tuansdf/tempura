@@ -1,6 +1,6 @@
 import Comment from "/src/components/comment/comment";
 
-const CommentList = ({ comments }) => {
+export default function CommentList({ comments }) {
   if (!comments || !Object.keys(comments).length) return null;
 
   if (comments?.length > 0 && comments[0].data.body)
@@ -11,6 +11,4 @@ const CommentList = ({ comments }) => {
         ))}
       </div>
     );
-};
-
-export default CommentList;
+}

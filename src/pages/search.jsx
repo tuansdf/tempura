@@ -1,5 +1,6 @@
 import { Link, useSearch } from "@tanstack/react-location";
 import clsx from "clsx";
+import { useEffect } from "react";
 
 import PostList from "/src/components/post/post-list";
 import Error from "/src/components/shared/error";
@@ -20,6 +21,11 @@ export default function Search() {
 
   // query
   const postsQuery = useInfiniteUrlQuery();
+
+  // effect
+  useEffect(() => {
+    document.title = `Search results for ${search.q}`;
+  }, [search.q]);
 
   return (
     <div className="space-y-8">
@@ -55,6 +61,20 @@ export default function Search() {
       ) : (
         <Error />
       )}
+
+      <div className="flex justify-center">
+        <button
+          className={clsx("btn", { loading: postsQuery.isFetching })}
+          onClick={postsQuery.fetchNextPage}
+          disabled={!postsQuery.hasNextPage || postsQuery.isFetchingNextPage}
+        >
+          {postsQuery.isFetching
+            ? "Loading..."
+            : postsQuery.hasNextPage
+            ? "Load more"
+            : "Nothing more to load"}
+        </button>
+      </div>
     </div>
   );
 }
