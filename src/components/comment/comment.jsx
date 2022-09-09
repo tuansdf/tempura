@@ -27,16 +27,20 @@ export default function Comment({ maxDepth = 10, defaultDepth = 5, comment }) {
   return (
     <div className="grid gap-2 border-l-2 border-base-content border-opacity-20 pl-4">
       {/* header */}
-      <div className="flex flex-wrap items-end gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         <Link className="link-primary" to={`/user/${comment.author}`}>
           u/{comment.author}
         </Link>
+
+        {comment.is_submitter && (
+          <span className="badge badge-primary font-bold">OP</span>
+        )}
 
         <span title={getDateTimeMessage(comment.created)} className="text-sm">
           {getElapsedTimeMessage(comment.created)}
         </span>
 
-        <label className="swap swap-rotate">
+        <label className="swap-rotate swap">
           <input
             type="checkbox"
             onChange={toggleComment}

@@ -1,4 +1,11 @@
-import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  HomeIcon,
+  MagnifyingGlassIcon,
+  MoonIcon,
+  SunIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import {
   Link,
   useLocation,
@@ -8,6 +15,7 @@ import {
 import clsx from "clsx";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
+import GitHubIcon from "/src/assets/github-icon";
 import { Themes } from "/src/constants/themes";
 
 import { themeAtom } from "/src/stores/theme.store";
@@ -70,24 +78,23 @@ export default function Header() {
       <nav className="navbar relative p-0">
         {/* left */}
         <ul className="ml-4">
-          <li>
-            <Link className="btn btn-ghost" to="/">
-              Home
+          <li title="Home">
+            <Link className="btn btn-ghost btn-square" to="/">
+              <HomeIcon className="h-6 w-6" />
             </Link>
           </li>
         </ul>
         {/* end/left */}
 
         {/* middle */}
-        <button
-          onClick={toggleMenu}
-          className="btn btn-circle btn-ghost ml-auto mr-4 md:hidden"
-        >
-          <Bars3Icon className="h-6 w-6" />
-        </button>
+        <label className="swap-rotate btn btn-circle swap btn-ghost ml-auto mr-4 md:hidden">
+          <input type="checkbox" checked={isMenu} onChange={toggleMenu} />
+          <XMarkIcon className="swap-on h-6 w-6" />
+          <Bars3Icon className="swap-off h-6 w-6" />
+        </label>
         <div
           className={clsx(
-            "absolute top-full z-40 ml-auto w-full overflow-hidden bg-base-100 transition-all md:relative md:h-max md:w-auto md:pb-0",
+            "absolute top-full z-40 ml-auto w-full overflow-hidden bg-base-100 transition-all md:relative md:h-max md:w-auto md:bg-inherit md:pb-0",
             { "h-0": !isMenu },
             { "py-4": isMenu }
           )}
@@ -113,19 +120,25 @@ export default function Header() {
                 </div>
               </form>
             </li>
-            <li className="ml-4 md:ml-0">
+            <li className="ml-4 md:ml-0" title="GitHub">
               <a
                 href="https://github.com/tuansdf/tempura"
                 target="_blank"
-                className="btn btn-ghost"
+                className="btn btn-ghost btn-square"
               >
-                GitHub
+                <GitHubIcon className="h-6 w-6" />
               </a>
             </li>
-            <li>
-              <button className="btn btn-ghost" onClick={toggleTheme}>
-                Theme
-              </button>
+            <li className="md:mr-4" title="Switch Theme">
+              <label className="swap-rotate btn btn-circle swap btn-ghost">
+                <input
+                  type="checkbox"
+                  checked={theme === Themes.DARK}
+                  onChange={toggleTheme}
+                />
+                <SunIcon className="swap-on h-6 w-6" />
+                <MoonIcon className="swap-off h-6 w-6" />
+              </label>
             </li>
           </ul>
         </div>
