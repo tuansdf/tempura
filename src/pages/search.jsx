@@ -25,14 +25,12 @@ export default function Search() {
     <div className="space-y-8">
       <div className="btn-group">
         <Link
-          to="/search/"
           search={({ type, ...old }) => old}
           className={clsx("btn", { "btn-active": !search.type })}
         >
           Posts
         </Link>
         <Link
-          to="/search/"
           search={(old) => ({ ...old, type: SearchTypes.COMMUNITIES })}
           className={clsx("btn", {
             "btn-active": search.type === SearchTypes.COMMUNITIES,

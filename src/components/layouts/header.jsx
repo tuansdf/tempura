@@ -1,9 +1,4 @@
-import {
-  Bars3Icon,
-  MagnifyingGlassIcon,
-  MoonIcon,
-  SunIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   Link,
   useLocation,
@@ -33,10 +28,11 @@ const Header = () => {
     switchTheme(theme);
   }, []);
 
-  const switchTheme = (theme) => {
-    setTheme(theme);
+  const switchTheme = () => {
+    const newTheme = theme === "dracula" ? "garden" : "dracula";
+    setTheme(newTheme);
     const html = document.querySelector("html");
-    html.setAttribute("data-theme", theme);
+    html.setAttribute("data-theme", newTheme);
   };
 
   useEffect(() => {
@@ -45,6 +41,7 @@ const Header = () => {
 
   const onChangeSearch = (e) => setQuery(e.target.value);
   const onSubmitSearch = (e) => {
+    if (!query) return;
     e.preventDefault();
     navigate({
       to:
@@ -63,7 +60,7 @@ const Header = () => {
 
   return (
     <>
-      <nav className="navbar relative mb-4 shadow">
+      <nav className="navbar relative mb-4 md:shadow">
         {/* left */}
         <ul>
           <li>
@@ -81,65 +78,52 @@ const Header = () => {
         >
           <Bars3Icon className="h-6 w-6" />
         </button>
-        <ul
+        <div
           className={clsx(
-            "absolute top-full z-50 ml-auto flex w-full flex-col items-start gap-2 overflow-hidden bg-base-100 shadow transition-all md:relative md:h-max md:w-auto md:flex-row",
-            { "h-0": !isMenu }
+            "absolute top-full z-40 ml-auto overflow-hidden bg-base-100 transition-all md:relative md:h-max md:w-auto md:pb-0",
+            { "h-0": !isMenu },
+            { "pb-4": isMenu }
           )}
         >
-          <li>
-            <form
-              role="search"
-              className="form-control"
-              onSubmit={onSubmitSearch}
-            >
-              <div className="input-group">
-                <input
-                  className="input input-bordered"
-                  type="search"
-                  placeholder="Search"
-                  value={query}
-                  onChange={onChangeSearch}
-                />
-                <button className="btn btn-square">
-                  <MagnifyingGlassIcon className="h-6 w-6" />
-                </button>
-              </div>
-            </form>
-          </li>
-          <li>
-            <a
-              href="https://github.com/tuansdf/tempura"
-              target="_blank"
-              className="btn btn-ghost"
-            >
-              GitHub
-            </a>
-          </li>
-          <li>
-            <div className="dropdown-end dropdown">
-              <label tabIndex="0" className="btn btn-ghost">
-                Theme
-              </label>
-              <ul
-                tabIndex="0"
-                className="dropdown-content menu rounded-box mt-3 w-40 bg-base-100 p-2 shadow"
+          <ul
+            className={clsx("flex flex-wrap items-start gap-2 md:flex-nowrap")}
+          >
+            <li className="order-last md:order-first">
+              <form
+                role="search"
+                className="form-control"
+                onSubmit={onSubmitSearch}
               >
-                <li onClick={() => switchTheme("garden")}>
-                  <div>
-                    <SunIcon className="h-6 w-6" /> Light
-                  </div>
-                </li>
-                <li onClick={() => switchTheme("dracula")}>
-                  <div>
-                    {" "}
-                    <MoonIcon className="h-6 w-6" /> Dark
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
+                <div className="input-group">
+                  <input
+                    className="input input-bordered"
+                    type="search"
+                    placeholder="Search"
+                    value={query}
+                    onChange={onChangeSearch}
+                  />
+                  <button className="btn btn-square">
+                    <MagnifyingGlassIcon className="h-6 w-6" />
+                  </button>
+                </div>
+              </form>
+            </li>
+            <li>
+              <a
+                href="https://github.com/tuansdf/tempura"
+                target="_blank"
+                className="btn btn-ghost"
+              >
+                GitHub
+              </a>
+            </li>
+            <li>
+              <button className="btn btn-ghost" onClick={switchTheme}>
+                Theme
+              </button>
+            </li>
+          </ul>
+        </div>
       </nav>
     </>
   );
