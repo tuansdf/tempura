@@ -29,7 +29,7 @@ export default function PostCard({ post, isDetail = false }) {
 
         <div>
           <Link
-            className="card-title link-primary inline"
+            className="card-title link-primary inline text-base"
             to={isDetail ? null : post.permalink}
             disabled={isDetail}
           >
