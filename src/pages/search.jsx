@@ -24,12 +24,12 @@ export default function Search() {
 
   // effect
   useEffect(() => {
-    document.title = `Search results for ${search.q}`;
+    document.title = `Search results for ${search.q} - Tempura`;
   }, [search.q]);
 
   return (
     <div className="space-y-8">
-      <div className="btn-group">
+      <div className="btn-group px-2 md:px-0">
         <Link
           search={({ type, ...old }) => old}
           className={clsx("btn", { "btn-active": !search.type })}

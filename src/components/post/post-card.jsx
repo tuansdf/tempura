@@ -4,8 +4,10 @@ import {
   ChatBubbleBottomCenterTextIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-location";
+
 import HlsPlayer from "/src/components/post/hls-player";
 import Markdown from "/src/components/shared/markdown";
+
 import { getDateTimeMessage, getElapsedTimeMessage } from "/src/helpers/date";
 import { getReadableNumber } from "/src/helpers/number";
 
@@ -17,27 +19,35 @@ export default function PostCard({ post, isDetail = false }) {
     post.preview?.reddit_video_preview?.hls_url;
 
   return (
-    <div className="card shadow-lg">
-      <div className="card-body space-y-2 p-0 md:space-y-4 md:p-8">
+    <div className="card card-bordered shadow-lg">
+      <div className="card-body gap-4 p-0 md:p-8">
         {/* header */}
-        <div className="flex flex-wrap items-end gap-2 px-4 pt-6 md:p-0">
-          <Link to={`/r/${post.subreddit}`} className="link-primary font-bold">
-            r/{post.subreddit}
-          </Link>
-          <Link to={`/user/${post.author}`} className="link-primary">
+        <div className="space-y-1 px-3 pt-4 md:p-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <Link
+              to={`/r/${post.subreddit}`}
+              className="link-primary font-bold"
+            >
+              r/{post.subreddit}
+            </Link>
+            <span title={getDateTimeMessage(post.created)} className="text-sm">
+              {getElapsedTimeMessage(post.created)}
+            </span>
+          </div>
+
+          <Link
+            to={`/user/${post.author}`}
+            className="link-primary inline-block text-sm"
+          >
             u/{post.author}
           </Link>
-          <span title={getDateTimeMessage(post.created)} className="text-sm">
-            {getElapsedTimeMessage(post.created)}
-          </span>
         </div>
         {/* end header */}
 
         {/* body */}
-
-        <div className="px-4 md:px-0">
+        <div className="px-3 md:px-0">
           <Link
-            className="card-title link-primary inline text-base"
+            className="font-bold"
             to={isDetail ? null : post.permalink}
             disabled={isDetail}
           >
@@ -46,15 +56,15 @@ export default function PostCard({ post, isDetail = false }) {
         </div>
 
         {post.url_overridden_by_dest && (
-          <div className="px-4 md:px-0">
-            <a className="truncate" href={post.url_overridden_by_dest}>
+          <div className="truncate px-3 md:px-0">
+            <a href={post.url_overridden_by_dest} className="text-sm">
               {post.url_overridden_by_dest}
             </a>
           </div>
         )}
 
         {(post.selftext || post.body) && (
-          <div className="px-4 md:px-0">
+          <div className="px-3 md:px-0">
             <Markdown content={post.selftext || post.body} clamp={!isDetail} />
           </div>
         )}
@@ -79,7 +89,7 @@ export default function PostCard({ post, isDetail = false }) {
         {/* end body */}
 
         {/* footer */}
-        <div className="flex flex-wrap items-center gap-4 px-4 pb-6 text-sm md:p-0 md:text-base">
+        <div className="flex flex-wrap items-center gap-4 px-3 pb-4 text-sm md:p-0 md:text-base">
           <span className="flex items-center gap-2">
             <ArrowUpIcon className="h-5 w-5" />
             <span className="" title={post.score}>

@@ -1,7 +1,8 @@
 import { ReactLocation, Router } from "@tanstack/react-location";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Layout from "/src/components/layouts/layout";
 
+import Layout from "/src/components/layouts/layout";
+import SubredditLayout from "/src/components/layouts/subreddit-layout";
 import Home from "/src/pages/home";
 import PostDetail from "/src/pages/post-detail";
 import Search from "/src/pages/search";
@@ -23,44 +24,42 @@ const location = new ReactLocation();
 
 const routes = [
   {
-    element: <Layout />,
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/r/:subreddit",
+    element: <SubredditLayout />,
     children: [
       {
         path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/r/:subreddit",
-        children: [
-          {
-            path: "/",
-            element: <Subreddit />,
-          },
-          {
-            path: "/search/",
-            element: <Search />,
-          },
-          {
-            element: <PostDetail />,
-          },
-        ],
-      },
-      {
-        path: "/user/:username",
-        element: <User />,
+        element: <Subreddit />,
       },
       {
         path: "/search/",
         element: <Search />,
       },
+      {
+        element: <PostDetail />,
+      },
     ],
+  },
+  {
+    path: "/user/:username",
+    element: <User />,
+  },
+  {
+    path: "/search/",
+    element: <Search />,
   },
 ];
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router routes={routes} location={location} />
+      <Router routes={routes} location={location}>
+        <Layout />
+      </Router>
     </QueryClientProvider>
   );
 }

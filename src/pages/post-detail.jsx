@@ -27,7 +27,9 @@ export default function PostDetail() {
       ) : (
         <>
           <PostCard isDetail post={post} />
-          <CommentList comments={comments} />
+          <div className="pr-2">
+            <CommentList comments={comments} />
+          </div>
         </>
       )}
     </div>

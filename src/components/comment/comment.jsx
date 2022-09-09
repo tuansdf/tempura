@@ -1,7 +1,4 @@
-import {
-  ArrowsPointingInIcon,
-  ArrowsPointingOutIcon,
-} from "@heroicons/react/24/outline";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-location";
 import clsx from "clsx";
 import { useState } from "react";
@@ -25,7 +22,7 @@ export default function Comment({ maxDepth = 10, defaultDepth = 5, comment }) {
   if (!(comment.author && comment.depth < maxDepth)) return null;
 
   return (
-    <div className="grid gap-2 border-l-2 border-base-content border-opacity-20 pl-4">
+    <div className="grid gap-2 border-l-2 border-base-content border-opacity-20 pl-3 md:pl-4">
       {/* header */}
       <div className="flex flex-wrap items-center gap-2">
         <Link className="link-primary" to={`/user/${comment.author}`}>
@@ -46,8 +43,8 @@ export default function Comment({ maxDepth = 10, defaultDepth = 5, comment }) {
             onChange={toggleComment}
             checked={isCollapsed}
           />
-          <ArrowsPointingOutIcon className="swap-on h-6 w-6" />
-          <ArrowsPointingInIcon className="swap-off h-6 w-6" />
+          <ChevronDownIcon className="swap-on h-5 w-5" />
+          <ChevronUpIcon className="swap-off h-5 w-5" />
         </label>
       </div>
       {/* end header */}

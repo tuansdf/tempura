@@ -15,9 +15,10 @@ import {
 import clsx from "clsx";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
+
 import GitHubIcon from "/src/assets/github-icon";
 import { Themes } from "/src/constants/themes";
-
+import { subredditAtom } from "/src/stores/params.store";
 import { themeAtom } from "/src/stores/theme.store";
 
 export default function Header() {
@@ -32,6 +33,7 @@ export default function Header() {
   const [isMenu, setIsMenu] = useState(false);
 
   const [theme, setTheme] = useAtom(themeAtom);
+  const [subreddit] = useAtom(subredditAtom);
 
   useEffect(() => {
     switchTheme(theme);
@@ -59,15 +61,15 @@ export default function Header() {
     if (!query) return;
     e.preventDefault();
     navigate({
-      to:
-        pathname.endsWith("search") || pathname.endsWith("search/")
-          ? pathname
-          : `${pathname}/search/`,
-      search: (old) => ({
-        ...old,
-        q: query,
-        restrict_sr: pathname.startsWith("/r/") ? 1 : null,
-      }),
+      to: subreddit ? `/r/${subreddit}/search/` : "/search/",
+      search: (old) => {
+        const search = {
+          ...old,
+          q: query,
+        };
+        if (subreddit) search.restrict_sr = 1;
+        return search;
+      },
     });
   };
 

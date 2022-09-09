@@ -22,7 +22,7 @@ export default function Markdown({ content, clamp = false }) {
       dangerouslySetInnerHTML={{ __html: htmlContent }}
       ref={markdown}
       className={clsx(
-        "prose prose-neutral max-w-none overflow-auto prose-a:link-secondary",
+        "prose prose-neutral max-w-none overflow-auto prose-a:link-primary",
         { "line-clamp": clamp },
         { mask: clamp && isLong }
       )}
