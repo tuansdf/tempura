@@ -1,4 +1,5 @@
 import {
+  Bars3Icon,
   MagnifyingGlassIcon,
   MoonIcon,
   SunIcon,
@@ -9,6 +10,7 @@ import {
   useNavigate,
   useSearch,
 } from "@tanstack/react-location";
+import clsx from "clsx";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 
@@ -23,6 +25,7 @@ const Header = () => {
   } = useLocation();
 
   const [query, setQuery] = useState("");
+  const [isMenu, setIsMenu] = useState(false);
 
   const [theme, setTheme] = useAtom(themeAtom);
 
@@ -56,11 +59,13 @@ const Header = () => {
     });
   };
 
+  const toggleMenu = () => setIsMenu((prev) => !prev);
+
   return (
     <>
-      <nav className="navbar mb-4 shadow">
+      <nav className="navbar relative mb-4 shadow">
         {/* left */}
-        <ul className="navbar-start">
+        <ul>
           <li>
             <Link className="btn btn-ghost" to="/">
               Home
@@ -70,7 +75,18 @@ const Header = () => {
         {/* end/left */}
 
         {/* middle */}
-        <ul className="navbar-center">
+        <button
+          onClick={toggleMenu}
+          className="btn btn-ghost btn-circle ml-auto md:hidden"
+        >
+          <Bars3Icon className="h-6 w-6" />
+        </button>
+        <ul
+          className={clsx(
+            "absolute top-full z-50 ml-auto flex w-full flex-col items-start gap-2 overflow-hidden bg-base-100 shadow transition-all md:relative md:h-max md:w-auto md:flex-row",
+            { "h-0": !isMenu }
+          )}
+        >
           <li>
             <form
               role="search"
@@ -91,12 +107,7 @@ const Header = () => {
               </div>
             </form>
           </li>
-        </ul>
-        {/* end/middle */}
-
-        {/* right */}
-        <ul className="navbar-end">
-          <li className="hidden md:block">
+          <li>
             <a
               href="https://github.com/tuansdf/tempura"
               target="_blank"
@@ -129,7 +140,6 @@ const Header = () => {
             </div>
           </li>
         </ul>
-        {/* end/right */}
       </nav>
     </>
   );
