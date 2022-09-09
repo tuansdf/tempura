@@ -12,7 +12,7 @@ export default function PostCard({ post, isDetail = false }) {
 
   return (
     <div className="card card-bordered shadow-lg">
-      <div className="card-body space-y-4 p-4 md:p-8">
+      <div className="card-body space-y-2 p-4 md:space-y-4 md:p-8">
         {/* header */}
         <div className="flex flex-wrap gap-2">
           <Link to={`/r/${post.subreddit}`} className="link-primary font-bold">

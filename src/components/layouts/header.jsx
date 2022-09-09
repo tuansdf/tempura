@@ -60,7 +60,7 @@ const Header = () => {
 
   return (
     <>
-      <nav className="navbar relative mb-4 md:shadow">
+      <nav className="navbar relative mb-4 p-0">
         {/* left */}
         <ul>
           <li>
@@ -80,7 +80,7 @@ const Header = () => {
         </button>
         <div
           className={clsx(
-            "absolute top-full z-40 ml-auto overflow-hidden bg-base-100 transition-all md:relative md:h-max md:w-auto md:pb-0",
+            "absolute top-full z-40 ml-auto w-full overflow-hidden bg-base-100 transition-all md:relative md:h-max md:w-auto md:pb-0",
             { "h-0": !isMenu },
             { "pb-4": isMenu }
           )}
