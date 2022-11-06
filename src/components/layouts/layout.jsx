@@ -10,16 +10,6 @@ export default function Layout() {
       <div className="container max-w-screen-md flex-1 py-4">
         <Outlet />
       </div>
-
-      <div>
-        {/* website's icon */}
-        <a
-          href="https://www.flaticon.com/free-stickers/food"
-          title="food stickers"
-        >
-          Food stickers created by Adib Sulthon - Flaticon
-        </a>
-      </div>
     </div>
   );
 }
