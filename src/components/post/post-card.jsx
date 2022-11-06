@@ -1,7 +1,7 @@
 import {
   ArrowUpIcon,
   ChatBubbleBottomCenterIcon,
-  ChatBubbleBottomCenterTextIcon,
+  ChatBubbleBottomCenterTextIcon
 } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-location";
 
@@ -9,7 +9,7 @@ import HlsPlayer from "/src/components/post/hls-player";
 import Markdown from "/src/components/shared/markdown";
 
 import { getDateTimeMessage, getElapsedTimeMessage } from "/src/helpers/date";
-import { getReadableNumber } from "/src/helpers/number";
+import { getCompactNumber } from "/src/helpers/number";
 
 export default function PostCard({ post, isDetail = false }) {
   if (!post || !Object.keys(post).length) return null;
@@ -93,7 +93,7 @@ export default function PostCard({ post, isDetail = false }) {
           <span className="flex items-center gap-2">
             <ArrowUpIcon className="h-5 w-5" />
             <span className="" title={post.score}>
-              {getReadableNumber(post.score)}
+              {getCompactNumber(post.score)}
             </span>{" "}
           </span>
           <span className="flex items-center gap-2">
@@ -103,7 +103,7 @@ export default function PostCard({ post, isDetail = false }) {
               <ChatBubbleBottomCenterIcon className="h-5 w-5" />
             )}
             <span className="" title={post.num_comments}>
-              {getReadableNumber(post.num_comments)}
+              {getCompactNumber(post.num_comments)}
             </span>{" "}
           </span>
           {post.stickied && (

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-location";
-import { getReadableNumber } from "/src/helpers/number";
+import { getCompactNumber } from "/src/helpers/number";
 
 export default function SubredditCard({ subreddit }) {
   if (!subreddit || !Object.keys(subreddit).length) return null;
@@ -16,7 +16,7 @@ export default function SubredditCard({ subreddit }) {
           </Link>
           <span>
             <span className="font-bold" title={subreddit.subscribers}>
-              {getReadableNumber(subreddit.subscribers)}
+              {getCompactNumber(subreddit.subscribers)}
             </span>{" "}
             subscribers
           </span>

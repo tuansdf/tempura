@@ -1,5 +1,5 @@
-import millify from "millify";
+const formatter = Intl.NumberFormat("en", { notation: "compact" });
 
-export const getReadableNumber = (number) => {
-  return millify(number);
+export const getCompactNumber = (number) => {
+  return formatter.format(number);
 };
